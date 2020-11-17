@@ -6,63 +6,80 @@ namespace ChineseChess
 {
     class Displayer
     {
-      public  void DisplayBoard(GameBoard gb)
+        public void DisplayBoard(GameBoard gb)
         {
-            Console.WriteLine("  中国象棋欢迎您\n\n");
+            Console.Clear();
+            Console.WriteLine("  |ChineseChess|\n\n");
 
-            for (int i = 0; i < 12; i++)
+            for (int i = 0; i < 11; i++)
             {
-                for (int j = 0; j < 10; j++)
+                for (int j = 0; j < 9; j++)
                 {
-                    Console.Write(gb.board[i,j]);
+
+                    Console.Write(gb.board[i, j]);
+
                 }
-                Console.Write("\n");
+                Console.Write(" " + (i + 1) + "\n");
             }
 
+
+            Console.Write(" A B C D E F G H I\n\n");
         }
 
-        void AskSelectPiece()
+        public void AskMovePiece(GameBoard gb)
         {
-            string flag;
-            char temp;
-
-            //gameBorad gb = gameborad;
-
-
-            //WriteAt("\nwhich piece you want to move? (e.g.: a2",0,21);
-            //WriteAt("", 0, 22);
+            // gb.SwitchPlayer();
+            Console.WriteLine("Which piece do you want to move?");
+            String flag;
             flag = Console.ReadLine();
 
-            if (flag[0] >= 'a' && flag[0] <= 'i')
+            if (isValid(flag))
             {
-                temp = flag[0];
-                string[] arr = flag.Split(temp);
+                Console.WriteLine("Where do u want moving " + flag + " to?");
+                string flag2 = Console.ReadLine();
 
-                //  WriteAt("Where do u want moving " + flag + " to?", 0,23);
-                flag = Console.ReadLine();
+               // isValid(flag);
 
-                if ((flag[0] >= 'a' && flag[0] <= 'i') && (flag[1] >= 1 && flag[1] <= 9))
-                    //if (valid())
+                gb.MovePiece(flag, flag2);
 
-                    Console.Clear();
-                //WriteAt("TEST", flag[0]+3,2*flag[1]);
-                //store game borad to class 'gb'
-                //could using int char[][] to store all element?
-                //change the value of [row][column] to change element.
-
-                //AskMovePiece(flag[1], flag[0], gb);
-
+                DisplayBoard(gb);
             }
             else
             {
                 Console.WriteLine("illegal request, try again!");
             }
+
+
         }
 
-        void AskMovePiece(char row, char column, GameBoard gb)
+        Boolean isValid(string flag)
         {
-            gb.SwitchPlayer();
+            if (!(flag.Length == 2 || flag.Length == 3))
+            {
+                Console.WriteLine("error1");
+                return false;
+            }
+
+            char temp = flag[0];
+            string[] arr = flag.Split(temp);
+
+            Console.WriteLine(flag[0]);
+            Console.WriteLine(flag[1]);
+
+            if ((flag[0] >= 'a' && flag[0] <= 'i') || (flag[0] >= 'A' && flag[0] <= 'I'))
+            {
+                Console.WriteLine("COME1");
+                if (flag[1] >= '1' && flag[1] <= '9')
+                {
+                    return true;
+                }
+            }
+
+            return false;
+
         }
+
+
     }
 
 }

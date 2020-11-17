@@ -24,8 +24,23 @@ namespace ChineseChess
         }
 
 
-        void MovePiece()
+        public void MovePiece(string flag, String flag2)
         {
+            //isValid
+            
+            char a = flag[0];
+            int b = (int)(a - 65);
+
+            
+
+            char c = flag2[0];
+            int d = (int)(c - 65);
+
+                 
+            char temp = board[b, flag[1]-49];
+            board[b, flag[1] - 49] = '十';
+            board[d, flag2[1]-49] = temp;
+            
 
         }
 
@@ -36,7 +51,7 @@ namespace ChineseChess
 
         void chessboardBuilding()
         {
-            board = new char[12, 10];
+            board = new char[11, 9];
 
             //building the grid
             for(int i = 0; i < 11; i++)
@@ -72,6 +87,7 @@ namespace ChineseChess
             board[10, 4] = '将';
             board[8, 1] = board[8, 7] = '炮';
             board[7, 0] = board[7, 2] = board[7, 4] = board[7, 6] = board[7, 8] = '卒';
+                
         }
     }
 }
