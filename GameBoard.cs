@@ -9,11 +9,14 @@ namespace ChineseChess
     {
         public Boolean isGameOver = false;
         string player = "red";
-        public char[,] board;
+        private Piece[,] board;
+        public int x0 =-1, y0 = -1;
+        public int x1 = -1, y1 = -1;
         public int[] currentPosition = new int[2] { -1, -1 };
         public int[] futurePosition = new int[2] { -1, -1 };
 
         public string Player { get => player; set => player = value; }
+        internal Piece[,] Board { get => board; set => board = value; }
 
         public GameBoard()
         {
@@ -45,7 +48,16 @@ namespace ChineseChess
                 {
                     //A1 -> 00 or a1 -> 00
                     this.currentPosition = getIndex(flag);
-                    return true;
+
+                    if (board[currentPosition[0], currentPosition[1]] != null){
+                        if(board[currentPosition[0], currentPosition[1]].Player == this.player)
+                            return true;
+                        return false;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
             }
 
@@ -87,26 +99,42 @@ namespace ChineseChess
 
 
 
+
+
         public Boolean MovePiece(string flag)
         {
-            //isValid  
+            //is the input valid
             if (!CalculateValidMoves(flag))
             {
                 return false;
             }
 
             //cancel the illegal move (nothing change
-            if((currentPosition[0] == futurePosition[0]) &&  (currentPosition[1] == futurePosition[1]))
+            if ((currentPosition[0] == futurePosition[0]) && (currentPosition[1] == futurePosition[1]))
             {
                 return false;
             }
 
-            char temp = board[currentPosition[0], currentPosition[1]];
-            board[currentPosition[0], currentPosition[1]] = board[futurePosition[0], futurePosition[1]];
-            board[futurePosition[0], futurePosition[1]] = temp;
+            //is the move follow the chess rules
+            if(!(board[currentPosition[0], currentPosition[1]].ValidMoves(futurePosition[0], futurePosition[1], this)))
+            {
+                return false;
+            }
 
+
+            board[futurePosition[0], futurePosition[1]] = board[currentPosition[0], currentPosition[1]];
+
+            board[futurePosition[0], futurePosition[1]].X = currentPosition[0];
+            board[futurePosition[0], futurePosition[1]].X = currentPosition[1];
+
+            
+
+            board[currentPosition[0], currentPosition[1]] = null;
+
+            //sign the last step;
             currentPosition[0] = futurePosition[0];
             currentPosition[1] = futurePosition[1];
+
             return true;
 
         }
@@ -133,43 +161,61 @@ namespace ChineseChess
 
         void chessboardBuilding()
         {
-            board = new char[11, 9];
-
-            //building the grid
-            for(int i = 0; i < 11; i++)
-            {
-                for(int j = 0; j< 9; j++)
-                {
-                    board[i,j] = '十';
-                }
-            }
-
+            board = new Piece[11, 9];
 
             //building the river
-            board[5, 0] = board[5, 1] = board[5, 4] = board[5, 7] = board[5, 8] = '一';
-            board[5, 2] = '楚';
-            board[5, 3] = '河';
-            board[5, 5] = '汉';
-            board[5, 6] = '界';
+            Board[5, 0] = new PieceCar('一');
+            Board[5, 1] = new PieceCar('一');
+            Board[5, 4] = new PieceCar('一');
+            Board[5, 7] = new PieceCar('一');
+            Board[5, 8] = new PieceCar('一');
+
+            Board[5, 2] = new PieceCar('楚');
+            Board[5, 3] = new PieceCar('河');
+            Board[5, 5] = new PieceCar('汉');
+            Board[5, 6] = new PieceCar('界');
 
             //building the RedChess
-            board[0, 0] = board[0, 8] = '車';
-            board[0, 1] = board[0, 7] = '马';
-            board[0, 2] = board[0, 6] = '相';
-            board[0, 3] = board[0, 5] = '仕';
-            board[0, 4] = '帅';
-            board[2, 1] = board[2, 7] = '砲';
-            board[3, 0] = board[3, 2] = board[3, 4] = board[3, 6] = board[3, 8] = '兵';
+            Board[0, 0] = new PieceCar("red", 0, 0);
+            Board[0, 1] = new PieceCar("red", 0, 1);
+            Board[0, 2] = new PieceCar("red", 0, 2);
+            Board[0, 3] = new PieceCar("red", 0, 3);
+            Board[0, 4] = new PieceCar("red", 0, 4);
+            Board[0, 5] = new PieceCar("red", 0, 5);
+            Board[0, 6] = new PieceCar("red", 0, 6);
+            Board[0, 7] = new PieceCar("red", 0, 7);
+            Board[0, 8] = new PieceCar("red", 0, 8);
+
+            Board[2, 1] = new PieceCar("red", 2, 1);
+            Board[2, 7] = new PieceCar("red", 2, 7);
+
+            Board[3, 0] = new PieceCar("red", 3, 0);
+            Board[3, 2] = new PieceCar("red", 3, 2);
+            Board[3, 4] = new PieceCar("red", 3, 4);
+            Board[3, 6] = new PieceCar("red", 3, 6);
+            Board[3, 8] = new PieceCar("red", 3, 8);
+
 
             //building the BlackChess
-            board[10, 0] = board[10, 8] = '車';
-            board[10, 1] = board[10, 7] = '马';
-            board[10, 2] = board[10, 6] = '象';
-            board[10, 3] = board[10, 5] = '士';
-            board[10, 4] = '将';
-            board[8, 1] = board[8, 7] = '炮';
-            board[7, 0] = board[7, 2] = board[7, 4] = board[7, 6] = board[7, 8] = '卒';
-                
+            board[10, 0] = new PieceCar("black", 10, 0);
+            board[10, 1] = new PieceCar("black", 10, 1);
+            board[10, 2] = new PieceCar("black", 10, 2);
+            board[10, 3] = new PieceCar("black", 10, 3);
+            board[10, 4] = new PieceCar("black", 10, 4);
+            board[10, 5] = new PieceCar("black", 10, 5);
+            board[10, 6] = new PieceCar("black", 10, 6);
+            board[10, 7] = new PieceCar("black", 10, 7);
+            board[10, 8] = new PieceCar("black", 10, 8);
+
+            board[8, 1] = new PieceCar("black", 8, 1);
+            board[8, 7] = new PieceCar("black", 8, 7);
+
+            board[7, 0] = new PieceCar("black", 7, 0);
+            board[7, 2] = new PieceCar("black", 7, 2);
+            board[7, 4] = new PieceCar("black", 7, 4);
+            board[7, 6] = new PieceCar("black", 7, 6);
+            board[7, 8] = new PieceCar("black", 7, 8);
+
         }
     }
 }

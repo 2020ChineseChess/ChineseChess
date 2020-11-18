@@ -16,38 +16,56 @@ namespace ChineseChess
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    
-                    if (i == gb.currentPosition[0] && j==gb.currentPosition[1])
+
+                    if (i == gb.currentPosition[0] && j == gb.currentPosition[1])
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
 
+                    if (gb.Board[i, j] != null)
+                    {
+                        Console.Write(gb.Board[i, j].Name);
+                    }
+                    else
+                    {
+                        Console.Write('十');
+                    }
                     
-                    Console.Write(gb.board[i, j]);
                     Console.BackgroundColor = ConsoleColor.Black;
-
                 }
 
                 //over the river
                 if (i != 5)
-                {
+
                     Console.Write(" " + count++);
-                }
+
 
                 Console.WriteLine("");
-                    
+
             }
 
-            Console.WriteLine(" A B C D E F G H I\n\n");
+            Console.WriteLine(" A B C D E F G H I\n");
 
-            Console.WriteLine("CurrentPlayer: " + gb.Player);
+
+            //change the color of player
+            Console.Write("CurrentPlayer:");
+
+            if (gb.Player == "red")
+                Console.BackgroundColor = ConsoleColor.DarkRed;
+
+            Console.WriteLine(gb.Player);
+            Console.BackgroundColor = ConsoleColor.Black;
         }
 
         public void AskSelectPiece()
         {
             Console.WriteLine("Which piece do you want to move?");
         }
-        public void AskError()
+        public void selectError()
         {
-            Console.WriteLine("illegal request, try again!");
+            Console.WriteLine("illegal request!You can only move your pieces!");
+        }
+        public void moveError()
+        {
+            Console.WriteLine("illegal request!You can't move to this place!");
         }
 
         public void AskMovePiece()

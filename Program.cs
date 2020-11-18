@@ -16,13 +16,13 @@ namespace ChineseChess
                 dp.AskSelectPiece();
 
                 while (!gb.SelectPiece(Console.ReadLine()))
-                    dp.AskError();
+                    dp.selectError();
 
                 dp.DisplayBoard(gb);
                 dp.AskMovePiece();
 
                 while (!gb.MovePiece(Console.ReadLine()))
-                    dp.AskError();
+                    dp.moveError();
 
                 gb.SwitchPlayer();
             }
