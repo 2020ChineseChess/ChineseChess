@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Data;
 
 namespace ChineseChess
 {
@@ -8,36 +7,28 @@ namespace ChineseChess
 
         static void Main(string[] args)
         {
-         
-         GameBoard gb = new GameBoard();
-         Displayer dp = new Displayer();
-         Boolean isGameOver = false;
-         int turn = 1;
+            GameBoard gb = new GameBoard();
+            Displayer dp = new Displayer();
 
-            while (!isGameOver)
+            while (!gb.isGameOver)
             {
-                //change the player
-                turn *= (-1);
+                dp.DisplayBoard(gb);
+                dp.AskSelectPiece();
 
-                switch (turn)
-                {
-                    case 1:
-                        //redMove();
-                        dp.DisplayBoard(gb);
-                        dp.AskMovePiece(gb);
-                        Console.ReadLine();
-                        break;
-                    case 2:
-                        //blackMove();
-                        dp.DisplayBoard(gb);
-                        dp.AskMovePiece(gb);
-                        Console.ReadLine();
-                        break;
-                }
+                while (!gb.SelectPiece(Console.ReadLine()))
+                    dp.AskError();
 
+                dp.DisplayBoard(gb);
+                dp.AskMovePiece();
+
+                while (!gb.MovePiece(Console.ReadLine()))
+                    dp.AskError();
+
+                gb.SwitchPlayer();
             }
 
         }
-    }
 
+    }
 }
+
