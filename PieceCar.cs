@@ -9,10 +9,9 @@ namespace ChineseChess
         public PieceCar(string player, int intX, int intY) : base(player, intX, intY)
         {
             this.Name = '車';
-            //Rook - 车
         }
 
-        public PieceCar(char name): base(name)
+        public PieceCar(char name) : base(name)
         {
             this.Name = name;
         }
@@ -58,7 +57,9 @@ namespace ChineseChess
                     //go up
                     for (int i = CurrentX - 1; i > x; i--)
                         if (gb.Board[i, y] != null)
-                            return false;
+                            if (gb.Board[i, y] != null)
+                                return false;
+
                 }
                 return true;
             }

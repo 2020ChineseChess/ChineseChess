@@ -9,7 +9,9 @@ namespace ChineseChess
         public void DisplayBoard(GameBoard gb)
         {
             Console.Clear();
-            Console.WriteLine("  |ChineseChess|\n\n");
+            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("  |ChineseChess|    ");
+            Console.WriteLine("                    ");
             int count = 0;
 
             for (int i = 0; i < 11; i++)
@@ -22,36 +24,59 @@ namespace ChineseChess
 
                     if (gb.Board[i, j] != null)
                     {
+
+                        if (gb.Board[i, j].Player == "red")
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                        }
+                        else if (gb.Board[i, j].Player == "black")
+                        {
+                            Console.ForegroundColor = ConsoleColor.Green;
+                        }
+                        
                         Console.Write(gb.Board[i, j].Name);
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.BackgroundColor = ConsoleColor.DarkGray;
                     }
                     else
                     {
-                        Console.Write('十');
+                        if(i == 5)
+                        {
+                            Console.Write(gb.river[j]);
+                        }
+                        else
+                        {
+                            Console.Write('十');
+                        }
                     }
+
                     
-                    Console.BackgroundColor = ConsoleColor.Black;
                 }
 
                 //over the river
                 if (i != 5)
-
+                {
                     Console.Write(" " + count++);
+                }
+                else
+                {
+                    Console.Write("  ");
+                }
 
 
                 Console.WriteLine("");
 
             }
 
-            Console.WriteLine(" A B C D E F G H I\n");
+            Console.WriteLine(" A B C D E F G H I  \n");
 
-
+            Console.BackgroundColor = ConsoleColor.Black;
             //change the color of player
             Console.Write("CurrentPlayer:");
-
-            if (gb.Player == "red")
-                Console.BackgroundColor = ConsoleColor.DarkRed;
-
+            Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.WriteLine(gb.Player);
+
+
             Console.BackgroundColor = ConsoleColor.Black;
         }
 

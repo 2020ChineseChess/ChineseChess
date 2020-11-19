@@ -10,6 +10,7 @@ namespace ChineseChess
         public Boolean isGameOver = false;
         string player = "red";
         private Piece[,] board;
+        public string river = "一一楚河一汉界一一";
         public int x0 =-1, y0 = -1;
         public int x1 = -1, y1 = -1;
         public int[] currentPosition = new int[2] { -1, -1 };
@@ -17,6 +18,7 @@ namespace ChineseChess
 
         public string Player { get => player; set => player = value; }
         internal Piece[,] Board { get => board; set => board = value; }
+        
 
         public GameBoard()
         {
@@ -92,6 +94,7 @@ namespace ChineseChess
             int temp = Values[1];
             Values[1] = Values[0];
             Values[0] = temp;
+ 
 
             return Values;
 
@@ -121,19 +124,21 @@ namespace ChineseChess
                 return false;
             }
 
-
+            //new one sign to old one
             board[futurePosition[0], futurePosition[1]] = board[currentPosition[0], currentPosition[1]];
 
-            board[futurePosition[0], futurePosition[1]].X = currentPosition[0];
-            board[futurePosition[0], futurePosition[1]].X = currentPosition[1];
+            //change the position of piece
+            board[futurePosition[0], futurePosition[1]].X = futurePosition[0];
+            board[futurePosition[0], futurePosition[1]].Y = futurePosition[1];
 
-            
-
+            //delete old one
             board[currentPosition[0], currentPosition[1]] = null;
 
             //sign the last step;
             currentPosition[0] = futurePosition[0];
             currentPosition[1] = futurePosition[1];
+
+
 
             return true;
 
@@ -162,18 +167,6 @@ namespace ChineseChess
         void chessboardBuilding()
         {
             board = new Piece[11, 9];
-
-            //building the river
-            Board[5, 0] = new PieceCar('一');
-            Board[5, 1] = new PieceCar('一');
-            Board[5, 4] = new PieceCar('一');
-            Board[5, 7] = new PieceCar('一');
-            Board[5, 8] = new PieceCar('一');
-
-            Board[5, 2] = new PieceCar('楚');
-            Board[5, 3] = new PieceCar('河');
-            Board[5, 5] = new PieceCar('汉');
-            Board[5, 6] = new PieceCar('界');
 
             //building the RedChess
             Board[0, 0] = new PieceCar("red", 0, 0);
