@@ -34,18 +34,18 @@ namespace ChineseChess
                     return false;
 
 
-            //判断是否符合符合运子规则
+            // judge if a rule is followed by a subrule
             if (x - CurrentX == 2 || x - CurrentX == -2)
             {
                 if (y - CurrentY == 2 || y - CurrentY == -2)
                 {
-                    //判断“田”字路径中间有没有子
+                    //  Whether there are pieces blocking elephant 
                     if (gb.Board[(x + CurrentX) / 2, (y + CurrentY) / 2] == null)
                     {
-                        //判断目标位置是否有子
+                        //judge is this a piece
                         if (gb.Board[x, y] != null)
                         {
-                            //若有子，则判断目标位置的棋子是否为己方
+                            //  Whether the pieces are owner
                             if (gb.Board[x, y].Player == this.Player)
                             {
                                 return false;

@@ -33,10 +33,10 @@ namespace ChineseChess
                         //判断是否对角线移动 judge the move if conforms to the diagonal rule
                         if ((x - CurrentX == 1 || x - CurrentX == -1) && (y - CurrentY == 1 || y - CurrentY == -1))
                         {
-                            //判断目标位置是否有子
+                            //判断目标位置是否有子  judge is this a piece
                             if (gb.Board[x, y] != null)
                             {
-                                //若有子，则判断目标位置的棋子是否为己方
+                                //若有子，则判断目标位置的棋子是否为己方  Whether the pieces are owner
                                 if (gb.Board[x, y].Player == this.Player)
                                 {
                                     return false;
@@ -48,15 +48,15 @@ namespace ChineseChess
                 }
                 else if (this.Player == "red")
                 {
-                    //判断终点是否在米字格里
+                    //  judge if the end point is in the meter grid
                     if (x <= 9 && x >= 7 && y <= 5 && y >= 3)
                     {
                         if ((x - CurrentX == 1 || x - CurrentX == -1) && (y - CurrentY == 1 || y - CurrentY == -1))
                         {
-                            //判断目标位置是否有子
+                            //judge is this a piece
                             if (gb.Board[x, y] != null)
                             {
-                                //若有子，则判断目标位置的棋子是否为己方
+                                //Whether the pieces are owner
                                 if (gb.Board[x, y].Player == this.Player)
                                 {
                                     return false;

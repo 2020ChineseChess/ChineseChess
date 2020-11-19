@@ -98,6 +98,11 @@ namespace ChineseChess
             Console.WriteLine("Where do you want move it to?");
         }
 
+        public void GameOver()
+        {
+            Console.WriteLine("GameOver! ");
+        }
+
     }
 
 }

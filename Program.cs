@@ -10,9 +10,16 @@ namespace ChineseChess
             GameBoard gb = new GameBoard();
             Displayer dp = new Displayer();
 
-            while (!gb.isGameOver)
+            while (true)
             {
                 dp.DisplayBoard(gb);
+
+                while (gb.judgeIsGameOver())
+                {
+                    dp.GameOver();
+                    return;
+                }
+
                 dp.AskSelectPiece();
 
                 while (!gb.SelectPiece(Console.ReadLine()))
@@ -24,8 +31,10 @@ namespace ChineseChess
                 while (!gb.MovePiece(Console.ReadLine()))
                     dp.moveError();
 
-                //gb.SwitchPlayer();
+                gb.SwitchPlayer();
             }
+
+
 
         }
 

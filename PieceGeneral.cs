@@ -24,7 +24,7 @@ namespace ChineseChess
             int CurrentY = this.Y;
 
 
-            if (Player == "black")//判断颜色 黑上紅下
+            if (Player == "black")//  Black on top and red on the bottom
             {
                 if (x < 0 || x > 2)
                 {
@@ -45,7 +45,7 @@ namespace ChineseChess
                 return false;
             }
 
-            //判断是否超过一步
+            //judge the pieces are owner
             if (Math.Abs(CurrentX - x) > 1 || Math.Abs(CurrentY - y) > 1)
             {
                 return false;

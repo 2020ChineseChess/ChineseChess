@@ -7,7 +7,6 @@ namespace ChineseChess
 
     class GameBoard
     {
-        public Boolean isGameOver = false;
         string player = "red";
         private Piece[,] board;
         public string river = "一一楚河一汉界一一";
@@ -170,6 +169,29 @@ namespace ChineseChess
             return false;
         }
 
+        public Boolean judgeIsGameOver()
+        {
+            int count = 0;
+
+            for (int i = 8; i <= 10; i++)
+                for (int j = 3; j <= 5; j++)
+                    if (board[i, j] != null)
+                        if (board[i, j].Name == '帥')
+                            count++;
+
+            for (int i = 0; i <= 2; i++)
+                for (int j = 3; j <= 5; j++)
+                    if (board[i, j] != null)
+                        if (board[i, j].Name == '將')
+                            count++;
+
+            if (count != 2)
+                return true;
+                
+
+            return false;
+        }
+
         void chessboardBuilding()
         {
             board = new Piece[11, 9];
@@ -211,7 +233,7 @@ namespace ChineseChess
 
             Board[7, 0] = new PieceSoldier("red", 7, 0);
             Board[7, 2] = new PieceSoldier("red", 7, 2);
-          //  Board[7, 4] = new PieceSoldier("red", 7, 4);
+            Board[7, 4] = new PieceSoldier("red", 7, 4);
             Board[7, 6] = new PieceSoldier("red", 7, 6);
             Board[7, 8] = new PieceSoldier("red", 7, 8);
 
