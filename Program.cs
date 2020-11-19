@@ -24,7 +24,7 @@ namespace ChineseChess
                 while (!gb.MovePiece(Console.ReadLine()))
                     dp.moveError();
 
-                gb.SwitchPlayer();
+                //gb.SwitchPlayer();
             }
 
         }

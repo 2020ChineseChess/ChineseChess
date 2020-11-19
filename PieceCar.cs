@@ -57,14 +57,11 @@ namespace ChineseChess
                     //go up
                     for (int i = CurrentX - 1; i > x; i--)
                         if (gb.Board[i, y] != null)
-                            if (gb.Board[i, y] != null)
-                                return false;
-
+                            return false;
                 }
                 return true;
             }
             return false;
         }
-
     }
 }
