@@ -26,11 +26,15 @@ namespace ChineseChess
                 if (CurrentX <= 4)
                 {
                     //down
+                    if (CurrentX == 4)
+                    {
+                        if (x == CurrentX + 2 && y == CurrentY)
+                            return true;
+                    }
+
                     if (x == CurrentX + 1 && y == CurrentY)
                         return true;
 
-                    if (x == CurrentX + 2 && y == CurrentY)
-                        return true;
                 }
                 //it has passed the river
                 else
@@ -50,12 +54,17 @@ namespace ChineseChess
                 if (CurrentX >= 6)
                 {
                     //up
+                    if (CurrentX == 6)
+                    {
+                        if (x == CurrentX - 2 && y == CurrentY)
+                            return true;
+                    }
+
                     if (x == CurrentX - 1 && y == CurrentY)
                         return true;
 
-                    if (x == CurrentX - 2 && y == CurrentY)
-                        return true;
                 }
+
                 //it has passed the river
                 else
                 {
