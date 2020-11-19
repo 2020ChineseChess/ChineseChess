@@ -7,13 +7,11 @@ namespace ChineseChess
 
     class GameBoard
     {
-        string player = "red";
+        string player = "red"; //default palyer
         private Piece[,] board;
-        public string river = "一一楚河一汉界一一";
-        public int x0 =-1, y0 = -1;
-        public int x1 = -1, y1 = -1;
-        public int[] currentPosition = new int[2] { -1, -1 };
-        public int[] futurePosition = new int[2] { -1, -1 };
+        public string river = "一一楚河一汉界一一"; //river
+        public int[] currentPosition = new int[2] { -1, -1 }; //current position
+        public int[] futurePosition = new int[2] { -1, -1 }; //future position
 
         public string Player { get => player; set => player = value; }
         internal Piece[,] Board { get => board; set => board = value; }
@@ -23,6 +21,8 @@ namespace ChineseChess
         {
             chessboardBuilding();
         }
+
+        //交换玩家
         public void SwitchPlayer()
         {
             if (Player == "red")
@@ -38,19 +38,23 @@ namespace ChineseChess
 
         public bool SelectPiece(String flag)
         {
+            //if valid
             if (flag.Length != 2)
             {
                 return false;
             }
 
+            //if valid
             if ((flag[0] >= 'a' && flag[0] <= 'i') || (flag[0] >= 'A' && flag[0] <= 'I'))
             {
                 if (flag[1] >= '0' && flag[1] <= '9')
                 {
-                    //A1 -> 00 or a1 -> 00
+                    //translate A1 to 00 or a1 to 00
                     this.currentPosition = getIndex(flag);
 
+                    //if piece exist.
                     if (board[currentPosition[0], currentPosition[1]] != null){
+                        //if the piece belong to player;
                         if(board[currentPosition[0], currentPosition[1]].Player == this.player)
                             return true;
                         return false;

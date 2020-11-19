@@ -21,7 +21,6 @@ namespace ChineseChess
             int CurrentX = this.X;
             int CurrentY = this.Y;
 
-            //后面写具体的判断
             //move horizontally
             if (CurrentX == x && CurrentY != y)
             {

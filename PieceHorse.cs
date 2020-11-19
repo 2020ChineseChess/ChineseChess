@@ -31,7 +31,7 @@ namespace ChineseChess
             //to right
             if (y == CurrentY + 2 && (x == CurrentX + 1 || x == CurrentX - 1))
             {
-                //whether stuck?
+                //if stuck
                 if (gb.Board[CurrentX, CurrentY + 1] == null)
                     return true;
             }
@@ -39,7 +39,7 @@ namespace ChineseChess
             //to left
             if (y == CurrentY - 2 && (x == CurrentX + 1 || x == CurrentX - 1))
             {
-                //whether stuck?
+                //if stuck
                 if (gb.Board[CurrentX, CurrentY - 1] == null)
                     return true;
             }
@@ -47,7 +47,7 @@ namespace ChineseChess
             //to up
             if (x == CurrentX - 2 && (y == CurrentY + 1 || y == CurrentY - 1))
             {
-                //whether stuck?
+                //if stuck
                 if (gb.Board[CurrentX - 1, CurrentY] == null)
                     return true;
             }
@@ -55,7 +55,7 @@ namespace ChineseChess
             //to down
             if (x == CurrentX + 2 && (y == CurrentY + 1 || y == CurrentY - 1))
             {
-                //whether stuck?
+                //if stuck
                 if (gb.Board[CurrentX + 1, CurrentY] == null)
                     return true;
             }

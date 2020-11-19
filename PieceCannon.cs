@@ -23,12 +23,8 @@ namespace ChineseChess
         {
             int CurrentX = this.X;
             int CurrentY = this.Y;
-            //CurrentX is the start x of position
-            //CurrentY is the start y of position
-            //x  is the end x of position
-            //y  is the end y of position
-            //to count how many pieces on the way it move forward
             int count = -1;
+
 
             //move horizontally
             if (x == CurrentX && y != CurrentY)
@@ -52,6 +48,7 @@ namespace ChineseChess
                     }
                 }
             }
+
             //move vertically
             if (y == CurrentY && x != CurrentX)
             {
@@ -72,6 +69,7 @@ namespace ChineseChess
                             count++;
                 }
             }
+
             //move and eat the piece
             if (count == 1 && gb.Board[x, y] != null)
                 return true;

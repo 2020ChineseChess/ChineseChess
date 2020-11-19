@@ -23,8 +23,8 @@ namespace ChineseChess
             int CurrentX = this.X;
             int CurrentY = this.Y;
 
-
-            if (Player == "black")//  Black on top and red on the bottom
+            //could not go out of 3*3 grid;
+            if (Player == "black")
             {
                 if (x < 0 || x > 2)
                 {
@@ -45,15 +45,14 @@ namespace ChineseChess
                 return false;
             }
 
-            //judge the pieces are owner
+            //could only move 1 step;
             if (Math.Abs(CurrentX - x) > 1 || Math.Abs(CurrentY - y) > 1)
             {
                 return false;
             }
 
 
-            //此处写判断帅将的移动位置
-            //水平移动
+            //move horizontal
             if (CurrentX == x && CurrentY != y)
             {
                 //go right
@@ -74,7 +73,7 @@ namespace ChineseChess
 
             }
 
-            //竖直移动
+            //move vertical
             if (x != CurrentX && y == CurrentY)
             {
 

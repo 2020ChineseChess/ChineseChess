@@ -19,8 +19,7 @@ namespace ChineseChess
             int CurrentX = this.X;
             int CurrentY = this.Y;
 
-            // red is above, black is below
-            // red side
+ 
             if (Player == "black")
             {
                 //it hasn't passed the river 

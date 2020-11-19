@@ -27,16 +27,16 @@ namespace ChineseChess
                 //judge the player is the black or red
                 if (this.Player == "black")
                 {
-                    //判断终点是否在米字格里 judge the destination if is in the 3*3 grid
+                    //judge the destination if is in the 3*3 grid
                     if (x <= 2 && x >= 0 && y <= 5 && y >= 3)
                     {
-                        //判断是否对角线移动 judge the move if conforms to the diagonal rule
+                        //judge the move if conforms to the diagonal rule
                         if ((x - CurrentX == 1 || x - CurrentX == -1) && (y - CurrentY == 1 || y - CurrentY == -1))
                         {
-                            //判断目标位置是否有子  judge is this a piece
+                            //judge is this a piece
                             if (gb.Board[x, y] != null)
                             {
-                                //若有子，则判断目标位置的棋子是否为己方  Whether the pieces are owner
+                                //Whether the pieces are owner
                                 if (gb.Board[x, y].Player == this.Player)
                                 {
                                     return false;
